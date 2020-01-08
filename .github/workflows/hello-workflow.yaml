@@ -17,5 +17,5 @@ jobs:
         env:
           TWO: 2
         run: |
-        SUM=$(($TWO + $TWO))
-        echo 'two and two makes' $SUM
+          SUM=$(($TWO + $TWO))
+          echo 'two and two makes' $SUM
