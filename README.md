@@ -1,17 +1,22 @@
-# Github Actions and Workflows
+# GitHub Actions and Workflows
 
 ## About this document
-This repo is an example of how to use GitHub actions to automate useful things. This README is meant to provide a 
-pedagogical introduction to how that works. By "pedagogical" I mean that this is the tutorial I wanted to find but 
-couldn't. GitHub's own documentation is clearly written and comprehensive, but I found that the major concepts weren't 
-laid out in the right order for me to absorb everything, and I had to go digging a bit until things clicked for me. YMMV. 
-Plenty of other tutorials were basically lists of instructions of what to type, but were specific to the task being automated rather
-than trying to explain the big picture. Hence, I wrote this up. Note that it's a work in progress. Please feel free to 
+This repo is an example of how to use GitHub actions to automate useful things, by running tests whenever someone pushes to it.
+ This README is meant to provide a pedagogical introduction to how that works. 
+ 
+ By "pedagogical" I mean that this is the tutorial I wanted to find but couldn't. GitHub's own documentation is clearly written and 
+ comprehensive, but I found that the major concepts weren't laid out in the right order for me to absorb everything, 
+ and I had to go digging a bit until things clicked for me. YMMV. 
+ 
+Plenty of other tutorials were basically helpful lists of instructions of what to type, but were specific to the task being automated 
+rather than trying to explain the big picture. A list of the ones I found useful can be found below. 
+
+Hence, I wrote this up. Note that it's a work in progress. Please feel free to 
 open an issue if you find something unclear or think I've got something wrong.
 
 ## What are they good for?
 You want stuff to happen (like running your unit tests or deploying your app to production) 
-triggered by some event in Github (like a pull request or someone pushing to master.)
+triggered by some event in GitHub (like a pull request or someone pushing to master.)
 
 Often there's some third party API that can set this up for you with a 
 [webhook](https://developer.github.com/webhooks/). But perhaps there's not an API that fulfills your 
@@ -73,6 +78,27 @@ Our `run` command was a single line. To define a sequence of bash instructions i
       echo 'two and two makes' $SUM
 ```
 
+As an alternative to defining bash commands with `run`, we can also use GitHub **actions**. 
+An action is a workflow step defined by a re-usable module of code. Actions are published with a versioning 
+scheme `{owner}/{repo}@{ref}`, and invoked with the `uses` command. For example, if we want to checkout our 
+repo on our runner, GitHub has provided us with an action :
+```yaml
+    - uses: actions/checkout@v1
+```
+
+The name tells us that we're getting the action defined in 
+[this repo](https://github.com/actions/checkout).
+We `name` actions and can provide arguments using the `with` key, like this:
+```yaml
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+```
+
+To write an action, see [here](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/building-actions).
+Note that you can [define an action within your repo](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/about-actions#choosing-a-location-for-your-action)
+instead of publishing it as a separate module.
 
 ## Useful references
 https://help.github.com/en/actions
