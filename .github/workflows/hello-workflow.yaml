@@ -1,0 +1,13 @@
+name: My first workflow
+
+# Here we specify what event in github triggers the execution of the workflow.
+on: push
+
+# A workflow consists of one or more jobs.
+# A job is a unit of work that runs on a single machine
+jobs:
+  my_first_job:
+    runs-on: ubuntu-latest # specify the OS for our machine.
+    steps:
+      - name: Print a dumb greeting
+        run: echo 'Hello world'
