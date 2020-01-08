@@ -6,7 +6,8 @@ pedagogical introduction to how that works. By "pedagogical" I mean that this is
 couldn't. GitHub's own documentation is clearly written and comprehensive, but I found that the major concepts weren't 
 laid out in the right order for me to absorb everything, and I had to go digging a bit until things clicked for me. YMMV. 
 Plenty of other tutorials were basically lists of instructions of what to type, but were specific to the task being automated rather
-than trying to explain the big picture. Hence, I wrote this up.
+than trying to explain the big picture. Hence, I wrote this up. Note that it's a work in progress. Please feel free to 
+open an issue if you find something unclear or think I've got something wrong.
 
 ## What are they good for?
 You want stuff to happen (like running your unit tests or deploying your app to production) 
@@ -58,7 +59,7 @@ the output of this simple job
 
 To actually do useful stuff, we need to define more interesting steps.
 
-## Defining steps
+## Defining steps [WIP]
 
 
 
