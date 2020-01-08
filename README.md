@@ -23,7 +23,8 @@ Enter the workflow.
 
 A workflow is a way to execute tasks triggered by some event within GitHub. 
 You define a workflow by a YAML file that lives in `$YOUR_PROJECT_ROOT_DIR/.github/workflows`; 
-this project has one you can check out.
+this project has one you can check out. If you're unfamiliar with YAML, see 
+[a five minute tutorial](https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes).
 
 A workflow has a `name`, and an `on` trigger that specifies when it gets run:
 
@@ -34,8 +35,9 @@ on: push
 ```
 
 The instructions in a workflow are comprised of **jobs**. Each job tells GitHub 
-to carry out a set of instructions on some host machine. This might be a server you own, or it 
-might be some virtual host that gets set up just to run your instructions and cleaned up afterwards.
+to carry out a set of instructions on some host machine, which in this context is called a **runner**. 
+This might be a server you own, or it might be some virtual host machine that gets set up just to run your 
+instructions and cleaned up afterwards.
 
 The instructions in an individual job are called **steps**.
 
@@ -60,9 +62,21 @@ the output of this simple job
 To actually do useful stuff, we need to define more interesting steps.
 
 ## Defining steps [WIP]
-
+Our example step above just had a `name`, and a `run` command. We can also set `env` variables in a step.
+Our `run` command was a single line. To define a sequence of bash instructions instead we can use the pipe operator `|`:
+```yaml
+    - name: A simple calculator
+      env:
+        TWO: 2
+      run: |
+      SUM=$(($TWO + $TWO))
+      echo 'two and two makes' $SUM
+```
 
 
 ## Useful references
+https://help.github.com/en/actions
+https://firefart.at/post/using-mysql-service-with-github-actions/
 https://andycroll.com/ruby/github-actions-ci-for-rails-with-postgresql/
+https://andycroll.com/ruby/github-actions-ci-for-rails-with-specific-ruby-versions
 

@@ -13,3 +13,9 @@ jobs:
     steps:
       - name: Print a dumb greeting
         run: echo 'Hello world'
+      - name: A simple calculator
+        env:
+          TWO: 2
+        run: |
+        SUM=$(($TWO + $TWO))
+        echo 'two and two makes' $SUM
