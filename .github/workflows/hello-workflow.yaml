@@ -45,6 +45,9 @@ jobs:
           rvm install $RUBY_VERSION --binary
           rvm --default use $RUBY_VERSION
 
+      - name: Install MYSQL client
+        run: sudo apt-get install libmysqlclient-dev
+
       - name: Build App
         env:
           DB_HOST: localhost
