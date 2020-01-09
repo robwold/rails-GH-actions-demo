@@ -25,7 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
+      - name: Set up RVM
+          run: curl -sSL https://get.rvm.io | bash
+
+      - name: Set up a custom Ruby
+        env:
+          RUBY_VERSION: 2.4.9
+        run: |
+          source $HOME/.rvm/scripts/rvm
+          rvm install $RUBY_VERSION --binary
+          rvm --default use $RUBY_VERSION
