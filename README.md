@@ -2,17 +2,18 @@
 
 ## About this document
 This repo is an example of how to use GitHub actions to automate useful things, by running tests whenever someone pushes to it.
- This README is meant to provide a pedagogical introduction to how that works. 
+This README is meant to provide a pedagogical introduction to how that works. 
  
- By "pedagogical" I mean that this is the tutorial I wanted to find but couldn't. GitHub's own documentation is clearly written and 
- comprehensive, but I found that the major concepts weren't laid out in the right order for me to absorb everything, 
- and I had to go digging a bit until things clicked for me. YMMV. 
+By "pedagogical" I mean that this is the tutorial I wanted to find but couldn't. GitHub's own documentation is clearly written and 
+comprehensive, but I found that the major concepts weren't laid out in the right order for me to absorb everything, 
+and I had to go digging a bit until things clicked for me. YMMV. 
  
 Plenty of other tutorials were basically helpful lists of instructions of what to type, but were specific to the task being automated 
 rather than trying to explain the big picture. A list of the ones I found useful can be found below. 
 
-Hence, I wrote this up. Note that it's a work in progress. Please feel free to 
-open an issue if you find something unclear or think I've got something wrong.
+Hence, I wrote this up. I am not an expert on this stuff; it should be apparent that this document was borne out of 
+frustration at my inability to DevOps.
+Please feel free to open an issue if you find something unclear or think I've got something wrong.
 
 ## What are they good for?
 You want stuff to happen (like running your unit tests or deploying your app to production) 
@@ -64,7 +65,12 @@ the output of this simple job
 [here](https://github.com/robwold/rails-GH-actions-demo/commit/d48da7e75c74c92071edc2e41b599c69761d4dc9/checks?check_suite_id=390732045)
 . 
 
-To actually do useful stuff, we need to define more interesting steps.
+To actually do useful stuff, we need to define more interesting steps. We'll do that in the next section. But before we 
+do, this is a logical place to note that as a job runs on a single runner, it's also where you specify ** services** 
+needed by that runner. These are basically docker containers that host things like databases or caches and make them 
+available to ports on your runner's localhost. Virtual Hosts with Ubuntu 
+[have MYSQL already installed](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners#ubuntu-1804-lts)
+so I don't need any in my example, but you can find examples of how to set up Postgresql or Redis in the linked articles.
 
 ## Defining steps
 Our example step above just had a `name`, and a `run` command. We can also set `env` variables in a step.
@@ -102,11 +108,25 @@ Note that you can [define an action within your repo](https://help.github.com/en
 instead of publishing it as a separate module.
 
 ## About this example project
-**TODO**
+This is not a functional Rails app. It has a single model and a single test for that model that I run purely as a proof 
+of concept. The shape of its non-default dependencies have been driven by my requirement to use this as a test run for the Rails app
+I work on in production.
+It uses the 
+[Figaro](https://github.com/laserlemon/figaro) 
+gem to set environment variables in a file `config/application.yml` deliberately not included in this
+repo. If for some reason you ever wanted to clone this repo you will have to create that file:
+```yaml
+DB_HOST: localhost
+DB_USER: root
+DB_PWD: $3cret!
+```
+with settings appropriate to your system. The actual workflow is drawn heavily from Andy Croll's articles below, 
+as are some of the examples in this README.
 
 ## Useful references
-https://help.github.com/en/actions
-https://andycroll.com/ruby/github-actions-ci-for-rails-with-postgresql/
-https://andycroll.com/ruby/github-actions-ci-for-rails-with-specific-ruby-versions
-https://firefart.at/post/using-mysql-service-with-github-actions/
+* https://help.github.com/en/actions
+* https://andycroll.com/ruby/github-actions-ci-for-rails-with-postgresql/
+* https://andycroll.com/ruby/github-actions-ci-for-rails-with-specific-ruby-versions
+* https://firefart.at/post/using-mysql-service-with-github-actions/
+
 
