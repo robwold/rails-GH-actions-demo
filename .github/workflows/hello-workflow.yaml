@@ -23,14 +23,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-#    services:
-#      mysql:
-#        image: mysql:5.7
-##        env:
-##          MYSQL_DATABASE: gh_action_demo_test
-#        ports:
-#            - 3306:3306
-
     steps:
       - uses: actions/checkout@v1
 
@@ -59,14 +51,13 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup RAILS_ENV=test
-#          bin/rails db:test:prepare RAILS_ENV=$RAILS_ENV
-#
-#      - name: Run Tests
-#        env:
-#          DB_HOST: localhost
-#          DB_USER: root
-#          DB_PWD: root
-#          RAILS_ENV: test
-#        run: |
-#          source $HOME/.rvm/scripts/rvm
-#          bundle exec rails t
+
+      - name: Run Tests
+        env:
+          DB_HOST: localhost
+          DB_USER: root
+          DB_PWD: root
+          RAILS_ENV: test
+        run: |
+          source $HOME/.rvm/scripts/rvm
+          bundle exec rails t
