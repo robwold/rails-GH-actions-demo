@@ -66,7 +66,7 @@ the output of this simple job
 
 To actually do useful stuff, we need to define more interesting steps.
 
-## Defining steps [WIP]
+## Defining steps
 Our example step above just had a `name`, and a `run` command. We can also set `env` variables in a step.
 Our `run` command was a single line. To define a sequence of bash instructions instead we can use the pipe operator `|`:
 ```yaml
@@ -74,8 +74,8 @@ Our `run` command was a single line. To define a sequence of bash instructions i
       env:
         TWO: 2
       run: |
-      SUM=$(($TWO + $TWO))
-      echo 'two and two makes' $SUM
+        SUM=$(($TWO + $TWO))
+        echo 'two and two makes' $SUM
 ```
 
 As an alternative to defining bash commands with `run`, we can also use GitHub **actions**. 
@@ -95,14 +95,18 @@ We `name` actions and can provide arguments using the `with` key, like this:
         with:
           ruby-version: 2.6.x
 ```
+where we use an argument to tell the action which version of Ruby we want to install on our system.
 
 To write an action, see [here](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/building-actions).
 Note that you can [define an action within your repo](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/about-actions#choosing-a-location-for-your-action)
 instead of publishing it as a separate module.
 
+## About this example project
+**TODO**
+
 ## Useful references
 https://help.github.com/en/actions
-https://firefart.at/post/using-mysql-service-with-github-actions/
 https://andycroll.com/ruby/github-actions-ci-for-rails-with-postgresql/
 https://andycroll.com/ruby/github-actions-ci-for-rails-with-specific-ruby-versions
+https://firefart.at/post/using-mysql-service-with-github-actions/
 
