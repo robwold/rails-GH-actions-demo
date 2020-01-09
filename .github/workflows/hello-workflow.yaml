@@ -45,17 +45,17 @@ jobs:
           rvm install $RUBY_VERSION --binary
           rvm --default use $RUBY_VERSION
 
-#      - name: Build App
-#        env:
-#          DB_HOST: localhost
-#          DB_USER: root
-#          DB_PWD: root
-#          RAILS_ENV: test
-#        run: |
-#          source $HOME/.rvm/scripts/rvm
-#          gem install bundler
-#          bundle install --jobs 4 --retry 3
-#          bin/rails db:test:prepare RAILS_ENV=$RAILS_ENV
+      - name: Build App
+        env:
+          DB_HOST: localhost
+          DB_USER: root
+          DB_PWD: root
+          RAILS_ENV: test
+        run: |
+          source $HOME/.rvm/scripts/rvm
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bin/rails db:test:prepare RAILS_ENV=$RAILS_ENV
 #
 #      - name: Run Tests
 #        env:
