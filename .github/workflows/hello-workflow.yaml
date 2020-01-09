@@ -26,10 +26,10 @@ jobs:
     services:
       mysql:
         image: mysql:5.7
-        env:
-          MYSQL_DATABASE: gh_action_demo_test
+#        env:
+#          MYSQL_DATABASE: gh_action_demo_test
         ports:
-            - 33306:3306
+            - 3306:3306
 
     steps:
       - uses: actions/checkout@v1
@@ -58,7 +58,8 @@ jobs:
           source $HOME/.rvm/scripts/rvm
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bin/rails db:test:prepare RAILS_ENV=$RAILS_ENV
+          bundle exec rails db:setup RAILS_ENV=test
+#          bin/rails db:test:prepare RAILS_ENV=$RAILS_ENV
 #
 #      - name: Run Tests
 #        env:
